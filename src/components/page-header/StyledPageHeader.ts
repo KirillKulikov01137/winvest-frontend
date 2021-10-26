@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {colors} from "../../styles/variables";
 
-export const StyledAuthFormHeader = styled.div`
+export const StyledPageHeader = styled.div`
   height: 50px;
   display: flex;
   align-items: center;
