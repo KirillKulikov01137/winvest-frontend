@@ -5,6 +5,7 @@ import {stocks} from "../home/stocks";
 import {ParamsI} from "./ParamsInterface";
 import {useParams} from 'react-router-dom';
 import {StyledStockPage} from "./StyledStockPage";
+import Graphic from '../../Graphics';
 
 const StockPage: FC = () => {
     const params = useParams<ParamsI>();
@@ -20,6 +21,7 @@ const StockPage: FC = () => {
                     </div>
                 </div>
             </Container>
+            <Graphic />
         </StyledStockPage>
     );
 };
