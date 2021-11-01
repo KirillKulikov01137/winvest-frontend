@@ -14,11 +14,11 @@ export const StyledStockPage = styled.div`
     margin-top: 6rem;
   }
 
-  .stockPageBody > div:first-child {
+  .stockPageBody > div {
     width: 50%;
   }
 
-  .stockPageBody > div:last-child {
-    width: 50%;
+  .stockPageBody > div:first-child {
+    margin-right: 2.5rem;
   }
 `

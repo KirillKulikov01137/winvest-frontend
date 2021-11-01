@@ -9,19 +9,19 @@ import Graphic from '../../Graphics';
 
 const StockPage: FC = () => {
     const params = useParams<ParamsI>();
+    const id = +params.id - 1;
 
     return (
         <StyledStockPage>
             <Container>
-                <PageHeader title={stocks[+params.id].name} />
+                <PageHeader title={stocks[id].name} />
                 <div className="stockPageBody">
-                    <div></div>
+                    <div><Graphic /></div>
                     <div>
-                        <span className="stockDescription">{'Текущая цена за акцию: ' + stocks[+params.id].price + '$'}</span>
+                        <span className="stockDescription">{'Текущая цена за акцию: ' + stocks[id].price + '$'}</span>
                     </div>
                 </div>
             </Container>
-            <Graphic />
         </StyledStockPage>
     );
 };
