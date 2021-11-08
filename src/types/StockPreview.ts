@@ -1,6 +1,6 @@
-export interface StockProps {
+export interface StockPreview {
     id: number
-    name: string
+    fullname: string
     price: number
     currency: string
 }

@@ -1,15 +1,13 @@
 import React, {FC} from 'react';
 import Container from "../../components/container/Container";
-import {stocks} from "./stocks";
-import Stock from "../../components/stock/Stock";
+import Stocks from '../../components/stocks/Stocks';
 
 const Home: FC = () => {
     return (
         <Container>
-            {stocks.map((stock) => <Stock key={stock.id} id={stock.id} name={stock.name} price={stock.price}/>)}
+           <Stocks/>
         </Container>
     );
-}
-;
+};
 
 export default Home;
