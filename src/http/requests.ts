@@ -7,9 +7,5 @@ interface GetStocks {
     stocks: StockPreview[]
 }
 
-interface GetStock {
-    stock: StockInterface
-}
-
 export const getStocks = (): Promise<AxiosResponse<GetStocks>> => http.get('stocks');
-export const getStock = (id: number): Promise<AxiosResponse<GetStock>> => http.get(`stocks/${id}`);
+export const getStock = (id: number): Promise<AxiosResponse<StockInterface>> => http.get(`stocks/${id}`);

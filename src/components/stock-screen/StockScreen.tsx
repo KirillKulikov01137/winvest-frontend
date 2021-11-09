@@ -5,6 +5,7 @@ import {useTypedSelector} from '../../hooks/useTypedSelector';
 import PageHeader from '../page-header/PageHeader';
 import Graphic from '../../Graphics';
 import {useActions} from '../../hooks/useActions';
+import {convertNumber} from '../../utils';
 
 const StockScreen: FC = () => {
     const {fetchStock} = useActions()
@@ -25,11 +26,18 @@ const StockScreen: FC = () => {
 
     return (
         <div>
-            <PageHeader title={stock.fullname} />
+            <PageHeader title={stock.shortname + ' ' + stock.fullname}/>
             <div className="stockPageBody">
-                <div><Graphic /></div>
+                <div><Graphic/></div>
                 <div>
-                    <span className="stockDescription">{`Текущая цена за акцию: ${stock.price} ${stock.currency}`}</span>
+                    {stock.price ? (<span
+                            className="stockDescription">{`Текущая цена за акцию: ${convertNumber(stock.price)}${stock.currency}`}</span>) :
+                        (<span
+                            className="stockDescription">{`Текущая цена за акцию: -`}</span>)}
+                    <div>
+                        {stock.price && (<span
+                            className="stockDescription">{`Цена акции изменилась на: ${convertNumber(stock.change)}${stock.currency}`}</span>)}
+                    </div>
                 </div>
             </div>
         </div>

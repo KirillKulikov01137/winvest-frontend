@@ -7,8 +7,10 @@ export const fetchStock = (id: number) => {
     return async (dispatch: Dispatch<StockAction>) => {
         try {
             dispatch({type:StockActionTypes.FETCH_STOCK})
+
             // const response = await getStock(id);
-            // dispatch({type:StockActionTypes.FETCH_STOCK_SUCCESS, payload: response.data.stock})
+            // dispatch({type:StockActionTypes.FETCH_STOCK_SUCCESS, payload: response.data})
+
             dispatch({type:StockActionTypes.FETCH_STOCK_SUCCESS, payload: stock})
 
         } catch (e) {
