@@ -6,7 +6,7 @@ const initialState: StocksState = {
     error: null
 }
 
-export default function userReducer(
+export default function stocksReducer(
     state = initialState,
     action: StocksAction
 ): StocksState {

@@ -1,4 +1,4 @@
-import {StockPreview} from '../../types/StockPreview';
+import {StockPreview} from '../../http/types/StockPreview';
 
 export interface StocksState {
     stocks: StockPreview[]
