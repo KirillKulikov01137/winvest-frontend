@@ -27,7 +27,7 @@ const StockScreen: FC = () => {
         <div>
             <PageHeader title={stock.fullname} />
             <div className="stockPageBody">
-                <div><Graphic/></div>
+                <div><Graphic /></div>
                 <div>
                     <span className="stockDescription">{`Текущая цена за акцию: ${stock.price} ${stock.currency}`}</span>
                 </div>
