@@ -5,10 +5,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 5px;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.YAxisText {
+  font-size: 5px;
 }
 
 code {
