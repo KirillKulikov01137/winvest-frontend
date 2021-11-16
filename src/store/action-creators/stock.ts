@@ -8,10 +8,10 @@ export const fetchStock = (id: number) => {
         try {
             dispatch({type:StockActionTypes.FETCH_STOCK})
 
-            // const response = await getStock(id);
-            // dispatch({type:StockActionTypes.FETCH_STOCK_SUCCESS, payload: response.data})
+            const response = await getStock(id);
+            dispatch({type:StockActionTypes.FETCH_STOCK_SUCCESS, payload: response.data})
 
-            dispatch({type:StockActionTypes.FETCH_STOCK_SUCCESS, payload: stock})
+            // dispatch({type:StockActionTypes.FETCH_STOCK_SUCCESS, payload: stock})
 
         } catch (e) {
             dispatch({type: StockActionTypes.FETCH_STOCK_ERROR, payload: 'Ошибка при загрузке данных акции'})

@@ -10,18 +10,8 @@ import {
     ResponsiveContainer,
     Brush
 } from 'recharts';
-import { ru } from 'date-fns/locale';
-import { stock } from './store/stock';
-
-var hist = stock.history;
-const data = [];
-
-for(let i = 0; i< hist.length; i++) {
-    data.push({
-        date: new Date(hist[i][0]).toISOString(),
-        value: hist[i][1],
-    })
-}
+import {ru} from 'date-fns/locale';
+import {stock} from './store/stock';
 
 /*for (let num = 30; num >= 1; num--) {
     const _date = new Date();
@@ -32,10 +22,24 @@ for(let i = 0; i< hist.length; i++) {
     })
 }*/
 
-function Graphic() {
+function Graphic(history) {
+
+    const getData = () => {
+        const data = [];
+        const hist = history.hist
+
+        for (let i = 0; i < hist.length; i++) {
+            data.push({
+                date: new Date(hist[i][0]).toISOString(),
+                value: hist[i][1],
+            })
+        }
+        return data;
+    }
+
     return (
-        <ResponsiveContainer width="100%" height={400} >
-            <AreaChart data={data}>
+        <ResponsiveContainer width="100%" height={400}>
+            <AreaChart data={getData()}>
                 <defs>
                     <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#2451B7" stopOpacity={1}/>
@@ -67,9 +71,9 @@ function Graphic() {
                 <Tooltip content={<CustomTooltip/>}/>
 
                 <CartesianGrid vertical={false}/>
-                
-                <Brush dataKey="name" />
-                
+
+                <Brush dataKey="name"/>
+
             </AreaChart>
         </ResponsiveContainer>
     );
@@ -77,12 +81,12 @@ function Graphic() {
 
 function updateBrush(pos) {
     if (this.state.timerId !== 0) {
-      clearTimeout(this.timerId)
+        clearTimeout(this.timerId)
     }
     this.state.timerId = setTimeout(() => {
-      this.setState({ startIndex: pos.startIndex, endIndex: pos.endIndex })
+        this.setState({startIndex: pos.startIndex, endIndex: pos.endIndex})
     }, 500)
-  }
+}
 
 function CustomTooltip({active, payload, label}) {
     if (active) {
