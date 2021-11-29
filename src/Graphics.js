@@ -11,21 +11,33 @@ import {
     Brush
 } from 'recharts';
 import {ru} from 'date-fns/locale';
-import {stock} from './store/stock';
+import moment, { locale } from 'moment';
+import 'moment/locale/ru';
 
-/*for (let num = 30; num >= 1; num--) {
-    const _date = new Date();
-    _date.setDate(_date.getDate() - num);
-    data.push({
-        date: _date.toISOString().split('T')[0],
-        value: 1 + Math.random() * 500,
-    })
-}*/
+moment.locale('ru')
 
+function linear(a, b, x){
+    return a * x + b
+}
+
+
+function quadratic(a, b, c, x){
+    return a * x ** 2 + b * x + c
+}
+
+function logarithmic(a, b, x){
+    return a * Math.log(x) + b
+}
+
+function exponential(a, b, x){
+    return a * Math.exp(x) + b
+}
+
+
+const data = [];
 function Graphic(history) {
 
     const getData = () => {
-        const data = [];
         const hist = history.hist
 
         for (let i = 0; i < hist.length; i++) {
@@ -34,12 +46,40 @@ function Graphic(history) {
                 value: hist[i][1],
             })
         }
+        GetPrediction(60, 'linear', 1,0,0);
         return data;
+    }
+
+    function GetPrediction(x, type, a, b, c) {
+        const predict = [];
+        for(let i=1; i<=x; i++)
+        {
+            let price;
+            switch(type){
+                case 'linear':
+                    price = linear(a, b, i);
+                    break;
+                case 'quadratic':
+                    price = quadratic(a, b, c, i);
+                    break;
+                case 'logarithmic':
+                    price = logarithmic(a, b, i);
+                    break;
+                case 'exponential':
+                    price = exponential(a, b, i);
+                    break;
+            }
+
+            data.push({
+                date: new Date(data[data.length-1] + 1),
+                predict: price,
+            })
+        }
     }
 
     return (
         <ResponsiveContainer width="100%" height={400}>
-            <AreaChart data={getData()}>
+            <AreaChart data={getData()} margin={{top: 5, right: 0, left: 30, bottom: 0}}>
                 <defs>
                     <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#2451B7" stopOpacity={1}/>
@@ -48,16 +88,12 @@ function Graphic(history) {
                 </defs>
 
                 <Area dataKey="value" stroke="#245B7" fill="url(#color)"/>
+                <Area dataKey="predict" stroke="#245B7" fill="green"/>
 
                 <XAxis
                     dataKey="date"
-                    tickLine={false}
-                    tickFormatter={(str) => {
-                        const date = parseISO(str);
-                        if (date.getDate() % 7 === 0)
-                            return format(date, "MMM, d", {locale: ru});
-                        return "";
-                    }}
+                    tickLine={true}
+                    tick={CustomizedAxisTick}
                 />
 
                 <YAxis
@@ -72,27 +108,36 @@ function Graphic(history) {
 
                 <CartesianGrid vertical={false}/>
 
-                <Brush dataKey="name"/>
+                <Brush tickFormatter={xAxisTickFormatter} dataKey="date"/>
 
             </AreaChart>
+
         </ResponsiveContainer>
     );
 }
 
-function updateBrush(pos) {
-    if (this.state.timerId !== 0) {
-        clearTimeout(this.timerId)
-    }
-    this.state.timerId = setTimeout(() => {
-        this.setState({startIndex: pos.startIndex, endIndex: pos.endIndex})
-    }, 500)
+const CustomizedAxisTick = ({ x, y, payload }) => {
+    const dateTip = moment(payload.value)
+        .format("ll");
+    return (
+        <g transform={`translate(${x},${y})`}>
+            <text x={23} y={0} dy={14} fontSize="1em" fontFamily="bold" textAnchor="end" fill="#363636">
+                {dateTip}</text>
+        </g>
+    );
 }
+
+const xAxisTickFormatter = (timestamp_measured) => {
+    return moment(timestamp_measured)
+        .format("ll")
+}
+
 
 function CustomTooltip({active, payload, label}) {
     if (active) {
         return (
             <div className="tooltip">
-                <h4>{format(parseISO(label), "eeee, d MMM, yyyy", {locale: ru})}</h4>
+                <h4>{label != null ? format(parseISO(label), "eeee, d MMM, yyyy", {locale: ru}) : null}</h4>
                 <p>{payload[0] != null ? payload[0].value.toFixed(2) : null} руб.</p>
             </div>
         );
