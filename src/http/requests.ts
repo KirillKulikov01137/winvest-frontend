@@ -7,5 +7,11 @@ interface GetStocks {
     stocks: StockPreview[]
 }
 
+export interface RegisterBody {
+    login: string
+    password: string
+}
+
 export const getStocks = (): Promise<AxiosResponse<GetStocks>> => http.get('stocks');
-export const getStock = (id: number): Promise<AxiosResponse<StockInterface>> => http.get(`stocks/${id}`);
+export const getStock = (id: number): Promise<AxiosResponse<StockInterface>> => http.get(`stocks/${id}?h=1`);
+export const register = (body: RegisterBody): Promise<AxiosResponse<unknown>> => http.post(`register`, body);

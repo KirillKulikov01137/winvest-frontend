@@ -2,9 +2,9 @@ import React, {FC} from 'react';
 import {ButtonProps} from "./ButtonProps";
 import {StyledButton} from "./StyledButton";
 
-const Button: FC<ButtonProps> = ({title}) => {
+const Button: FC<ButtonProps> = ({title, onClick}) => {
     return (
-        <StyledButton>
+        <StyledButton onClick={onClick}>
             {title}
         </StyledButton>
     );
