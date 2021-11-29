@@ -6,6 +6,7 @@ import PageHeader from '../page-header/PageHeader';
 import Graphic from '../../Graphics';
 import {useActions} from '../../hooks/useActions';
 import {convertNumber} from '../../utils';
+import {StyledStockScreen} from './StyledStockScreen';
 
 const StockScreen: FC = () => {
     const {fetchStock} = useActions()
@@ -25,7 +26,7 @@ const StockScreen: FC = () => {
         return <h1 className="technical-message">{error}</h1>
 
     return (
-        <div>
+        <StyledStockScreen>
             <PageHeader title={stock.shortname + ' ' + stock.fullname}/>
             <div className="stockPageBody">
                 <div><Graphic hist={stock.history} /></div>
@@ -35,12 +36,15 @@ const StockScreen: FC = () => {
                         (<span
                             className="stockDescription">{`Текущая цена за акцию: -`}</span>)}
                     <div>
-                        {stock.price && (<span
-                            className="stockDescription">{`Цена акции изменилась на: ${convertNumber(stock.change)}${stock.currency}`}</span>)}
+                        {stock.price && <span style={{color: '#000'}}>Цена акции изменилась на: </span>}
+                        {stock.price && stock.change >= 0 && (<span
+                            className="stockDescriptionGreen">{`+${convertNumber(stock.change)}%`}</span>)}
+                        {stock.price && stock.change < 0 && (<span
+                            className="stockDescriptionRed">{`${convertNumber(stock.change)}%`}</span>)}
                     </div>
                 </div>
             </div>
-        </div>
+        </StyledStockScreen>
     );
 };
 
