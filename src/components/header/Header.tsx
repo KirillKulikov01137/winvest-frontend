@@ -5,9 +5,10 @@ import {StyledHeader} from "./StyledHeader";
 import {NavLink} from "react-router-dom";
 import {HOME_ROUTE} from "../../router/paths";
 import Container from "../container/Container";
+import {useTypedSelector} from '../../hooks/useTypedSelector';
 
 const Header: FC = () => {
-    const isAuth = false;
+    const {isAuth} = useTypedSelector(state => state.login);
     return (
         <StyledHeader>
             <Container>

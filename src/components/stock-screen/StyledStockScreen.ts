@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const StyledStockScreen = styled.div`
   .stockDescriptionGreen {
-    color: green;
+    color: #00e427;
   }
 
   .stockDescriptionRed {
-    color: red;
+    color: #f94500;
   }
 `

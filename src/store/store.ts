@@ -4,11 +4,13 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import stocksReducer from './reducers/stocksReducer';
 import stockReducer from './reducers/stockReducer';
+import loginReducer from './reducers/loginReducer';
 
 const rootReducer = combineReducers({
     user: userReducer,
     stocks: stocksReducer,
-    stock: stockReducer
+    stock: stockReducer,
+    login: loginReducer
 })
 
 export const store = createStore(

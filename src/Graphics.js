@@ -33,53 +33,60 @@ function exponential(a, b, x){
     return a * Math.exp(x) + b
 }
 
+function getData(history) {
+    data = [];
+    const hist = history.hist
 
-const data = [];
+    for (let i = 0; i < hist.length; i++) {
+        data.push({
+            date: new Date(hist[i][0]).toISOString(),
+            value: hist[i][1],
+        })
+    }
+    oldData = data;
+    console.log(data)
+    GetPrediction(60, 'linear', 1,0,0);
+}
+
+function GetPrediction(x, type, a, b, c) {
+    // data = oldData;
+    // console.log(data)
+    for(let i=1; i<=x; i++)
+    {
+        let price;
+        switch(type){
+            case 'linear':
+                price = linear(a, b, i);
+                break;
+            case 'quadratic':
+                price = quadratic(a, b, c, i);
+                break;
+            case 'logarithmic':
+                price = logarithmic(a, b, i);
+                break;
+            case 'exponential':
+                price = exponential(a, b, i);
+                break;
+        }
+
+        if(data.length > 0)
+            data.push({
+            date: new Date(new Date(data[data.length-1].date)+ 24*1000*3600*i).toISOString(),
+            predict: price,
+        })
+    }
+}
+
+let data = [];
+let oldData = [];
+
 function Graphic(history) {
 
-    const getData = () => {
-        const hist = history.hist
-
-        for (let i = 0; i < hist.length; i++) {
-            data.push({
-                date: new Date(hist[i][0]).toISOString(),
-                value: hist[i][1],
-            })
-        }
-        GetPrediction(60, 'linear', 1,0,0);
-        return data;
-    }
-
-    function GetPrediction(x, type, a, b, c) {
-        const predict = [];
-        for(let i=1; i<=x; i++)
-        {
-            let price;
-            switch(type){
-                case 'linear':
-                    price = linear(a, b, i);
-                    break;
-                case 'quadratic':
-                    price = quadratic(a, b, c, i);
-                    break;
-                case 'logarithmic':
-                    price = logarithmic(a, b, i);
-                    break;
-                case 'exponential':
-                    price = exponential(a, b, i);
-                    break;
-            }
-
-            data.push({
-                date: new Date(data[data.length-1] + 1),
-                predict: price,
-            })
-        }
-    }
+    getData(history);
 
     return (
         <ResponsiveContainer width="100%" height={400}>
-            <AreaChart data={getData()} margin={{top: 5, right: 0, left: 30, bottom: 0}}>
+            <AreaChart data={data} margin={{top: 5, right: 0, left: 30, bottom: 0}}>
                 <defs>
                     <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#2451B7" stopOpacity={1}/>

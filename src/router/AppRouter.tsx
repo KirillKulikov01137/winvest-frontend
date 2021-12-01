@@ -2,9 +2,10 @@ import React, {FC} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {authorizedRoutes, publicRoutes, unauthorizedRoutes} from "./routes";
 import {HOME_ROUTE} from "./paths";
+import {useTypedSelector} from '../hooks/useTypedSelector';
 
 const AppRouter: FC = () => {
-    const isAuth = false;
+    const {isAuth} = useTypedSelector(state => state.login);
     return (
         <Switch>
             {

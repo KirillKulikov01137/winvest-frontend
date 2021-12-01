@@ -11,14 +11,16 @@ const Stock: FC<StockProps> = ({id, fullname, price, currency, shortname, change
             <NavLink to={`${STOCK_ROUTE}${id}`} className="stockLink">
                 <div className="stockLinkContainer">
                     <div><span className="linkDescriptionText">{shortname + ' ' + fullname}</span></div>
-                    {/*<div><span className="linkDescriptionText">{price ? convertNumber(price) + currency + ' | ' + convertNumber(change) : '-'}</span>*/}
                     <div>
-                        <span className="linkDescriptionText">{price ? convertNumber(price) + currency : '-'}</span>
-                        <span className="linkDescriptionText">{' | '}</span>
-                        {!price && <span className="linkDescriptionText">-</span>}
+                        <span className="linkDescriptionText"
+                              style={{marginRight: '1rem'}}>
+                            {price ? convertNumber(price) : '-'}
+                            {price && <>&#8381;</>}
+                        </span>
                         {change >= 0
                             ? <span className="linkDescriptionGreen">{price && '+' + convertNumber(change) + '%'}</span>
-                            : <span className="linkDescriptionRed">{price && '-' + convertNumber(Math.abs(change)) + '%'}</span>}
+                            : <span
+                                className="linkDescriptionRed">{price && '-' + convertNumber(Math.abs(change)) + '%'}</span>}
                     </div>
                 </div>
             </NavLink>

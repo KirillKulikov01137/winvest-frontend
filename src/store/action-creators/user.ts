@@ -1,13 +1,12 @@
 import {Dispatch} from 'redux';
-import {register, RegisterBody} from '../../http/requests';
+import {register, LoginBody} from '../../http/requests';
 import {UserAction, UserActionTypes} from '../reducers/userReducerTypes';
 
-export const registerUser = (body: RegisterBody) => {
+export const registerUser = (body: LoginBody) => {
     return async (dispatch: Dispatch<UserAction>) => {
         try {
             dispatch({type: UserActionTypes.REGISTER_USER})
-            const response = await register(body);
-            console.log(response)
+            await register(body);
             dispatch({type: UserActionTypes.REGISTER_USER_SUCCESS});
         } catch
             (e) {

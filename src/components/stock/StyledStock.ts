@@ -41,10 +41,14 @@ export const StyledStock = styled.div`
   }
 
   .linkDescriptionGreen {
-    color: green;
+    color: #00e427;
   }
 
   .linkDescriptionRed {
-    color: red;
+    color: #f94500;
+  }
+
+  .linkDescriptionGreen, .linkDescriptionRed {
+    font-size: 1.4rem;
   }
 `

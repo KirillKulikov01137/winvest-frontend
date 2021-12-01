@@ -32,7 +32,7 @@ const StockScreen: FC = () => {
                 <div><Graphic hist={stock.history} /></div>
                 <div>
                     {stock.price ? (<span
-                            className="stockDescription">{`Текущая цена за акцию: ${convertNumber(stock.price)}${stock.currency}`}</span>) :
+                            className="stockDescription">{`Текущая цена за акцию: ${convertNumber(stock.price)}`}<>&#8381;</></span>) :
                         (<span
                             className="stockDescription">{`Текущая цена за акцию: -`}</span>)}
                     <div>
