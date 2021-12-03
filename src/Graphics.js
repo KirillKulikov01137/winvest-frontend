@@ -33,6 +33,38 @@ function exponential(a, b, x){
     return a * Math.exp(x) + b
 }
 
+function findX(type, predict)
+{
+    let x = 1;
+    let y = calculatePrice(x, type, predict);
+    while(y<lastPrice)
+    {
+        x++;
+        y = calculatePrice(x, type, predict);
+    }
+    return x;
+}
+
+function calculatePrice(x, type, predict)
+{
+    let price;
+        switch(type){
+            case 'lin':
+                price = linear(predict[0], predict[1], x);
+                break;
+            case 'quad':
+                price = quadratic(predict[0], predict[1], predict[2], x);
+                break;
+            case 'log':
+                price = logarithmic(predict[0], predict[1], x);
+                break;
+            case 'dots':
+                price = predict[x];
+                break;
+        }
+        return price;
+}
+
 function getData(history) {
     data = [];
     const hist = history.hist
@@ -44,41 +76,35 @@ function getData(history) {
         })
     }
     oldData = data;
+    if(data.length > 0)
+    {
+        lastPrice = data[data.length-1].value;
+        lastDate = data[data.length-1].date;
+    }
     if (!history.predict)
         return
     GetPrediction(60, history.predict.type, history.predict.data);
+    console.log(history.predict.data);
 }
 
 function GetPrediction(x, type, predict) {
     // data = oldData;
-    for(let i=1; i<=x; i++)
-    {
-        let price;
-        switch(type){
-            case 'lin':
-                price = linear(predict[0], predict[1], i);
-                break;
-            case 'quad':
-                price = quadratic(predict[0], predict[1], predict[2], i);
-                break;
-            case 'log':
-                price = logarithmic(predict[0], predict[1], i);
-                break;
-            case 'dots':
-                price = predict[i];
-                break;
-        }
 
+    let startX = findX(type, predict);
+    for(let i=1 + startX; i<=x + startX; i++)
+    {
         if(data.length > 0)
             data.push({
-            date: new Date(new Date(data[data.length-1].date)+ 24*1000*3600*i).toISOString(),
-            predict: price,
+            date: new Date(new Date(new Date(lastDate).getDate() + 24*1000*3600*(i-startX))).toISOString(),
+            predict: calculatePrice(type != 'dots' ? i : i-startX, type, predict),
         })
     }
 }
 
 let data = [];
 let oldData = [];
+let lastPrice = 0;
+let lastDate;
 
 function Graphic(history) {
     getData(history);
