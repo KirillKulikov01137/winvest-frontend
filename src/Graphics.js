@@ -46,23 +46,23 @@ function getData(history) {
     oldData = data;
     if (!history.predict)
         return
-    GetPrediction(60, history.predict.type, 1,0,0, history.predict.data);
+    GetPrediction(60, history.predict.type, history.predict.data);
 }
 
-function GetPrediction(x, type, a, b, c, predict) {
+function GetPrediction(x, type, predict) {
     // data = oldData;
     for(let i=1; i<=x; i++)
     {
         let price;
         switch(type){
             case 'lin':
-                price = linear(a, b, i);
+                price = linear(predict[0], predict[1], i);
                 break;
             case 'quad':
-                price = quadratic(a, b, c, i);
+                price = quadratic(predict[0], predict[1], predict[2], i);
                 break;
             case 'log':
-                price = logarithmic(a, b, i);
+                price = logarithmic(predict[0], predict[1], i);
                 break;
             case 'dots':
                 price = predict[i];
