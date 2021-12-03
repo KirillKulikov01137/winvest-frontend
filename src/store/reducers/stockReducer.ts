@@ -15,6 +15,7 @@ const emptyStock: StockInterface = {
 
 const initialState: StockState = {
     stock: emptyStock,
+    predict: [],
     loading: false,
     error: null
 }
@@ -25,11 +26,11 @@ export default function stockReducer(
 ): StockState {
     switch (action.type) {
         case StockActionTypes.FETCH_STOCK:
-            return {loading: true, error: null, stock: emptyStock}
+            return {loading: true, error: null, stock: emptyStock, predict: []}
         case StockActionTypes.FETCH_STOCK_SUCCESS:
-            return {loading: false, error: null, stock: action.payload}
+            return {loading: false, error: null, stock: action.stock, predict: action.predict}
         case StockActionTypes.FETCH_STOCK_ERROR:
-            return {loading: false, error: action.payload, stock: emptyStock}
+            return {loading: false, error: action.payload, stock: emptyStock, predict: []}
         default:
             return state;
     }

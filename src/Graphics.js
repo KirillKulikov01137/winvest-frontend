@@ -44,28 +44,28 @@ function getData(history) {
         })
     }
     oldData = data;
-    console.log(data)
-    GetPrediction(60, 'linear', 1,0,0);
+    if (!history.predict)
+        return
+    GetPrediction(60, history.predict.type, 1,0,0, history.predict.data);
 }
 
-function GetPrediction(x, type, a, b, c) {
+function GetPrediction(x, type, a, b, c, predict) {
     // data = oldData;
-    // console.log(data)
     for(let i=1; i<=x; i++)
     {
         let price;
         switch(type){
-            case 'linear':
+            case 'lin':
                 price = linear(a, b, i);
                 break;
-            case 'quadratic':
+            case 'quad':
                 price = quadratic(a, b, c, i);
                 break;
-            case 'logarithmic':
+            case 'log':
                 price = logarithmic(a, b, i);
                 break;
-            case 'exponential':
-                price = exponential(a, b, i);
+            case 'dots':
+                price = predict[i];
                 break;
         }
 
@@ -81,7 +81,6 @@ let data = [];
 let oldData = [];
 
 function Graphic(history) {
-
     getData(history);
 
     return (

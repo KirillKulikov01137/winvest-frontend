@@ -20,5 +20,6 @@ export const loginUser = (body: LoginBody) => {
 export const logoutUser = () => {
     return (dispatch: Dispatch<LoginAction>) => {
         dispatch({type:LoginActionTypes.LOGOUT})
+        localStorage.removeItem(ACCESS_TOKEN)
     }
 }
