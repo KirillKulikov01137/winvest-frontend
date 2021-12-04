@@ -10,6 +10,7 @@ import {StyledStockScreen} from './StyledStockScreen';
 
 const StockScreen: FC = () => {
     const [predictType, setPredictType] = useState('dots')
+    const [quantity, setQuantity] = useState(0)
 
     const {fetchStock} = useActions()
     const params = useParams<ParamsI>();
@@ -20,6 +21,15 @@ const StockScreen: FC = () => {
     }, [])
 
     const {stock, predict, loading, error} = useTypedSelector(state => state.stock)
+    const {isAuth} = useTypedSelector(state => state.login)
+
+    const onAddClick = () => {
+
+    }
+
+    const onRemoveClick = () => {
+
+    }
 
     if (loading)
         return <h1 className="technical-message">Идет загрузка...</h1>
@@ -53,9 +63,8 @@ const StockScreen: FC = () => {
                         </div>
                     </div>
                     <div className="stocksButtonsContainer">
-                        {!stock.owned
-                        ? <button className="stockBtn">Добавить акцию</button>
-                        : <button className="stockBtn">Удалить акцию</button>}
+                        {isAuth && !stock.owned && <button className="stockBtn" onClick={()=>onAddClick()}>Добавить акцию</button>}
+                        {isAuth && stock.owned && <button className="stockBtn" onClick={()=>onRemoveClick()}>Удалить акцию</button>}
                     </div>
                 </div>
             </div>

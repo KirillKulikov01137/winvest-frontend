@@ -5,12 +5,14 @@ import thunk from 'redux-thunk';
 import stocksReducer from './reducers/stocksReducer';
 import stockReducer from './reducers/stockReducer';
 import loginReducer from './reducers/loginReducer';
+import portfolioReducer from './reducers/portfolioReducer';
 
 const rootReducer = combineReducers({
     user: userReducer,
     stocks: stocksReducer,
     stock: stockReducer,
-    login: loginReducer
+    login: loginReducer,
+    portfolio: portfolioReducer
 })
 
 export const store = createStore(

@@ -1,10 +1,12 @@
 import React, {FC} from 'react';
+import Container from '../../components/container/Container';
+import PortfolioScreen from '../../components/portfolio/PortfolioScreen';
 
 const Portfolio: FC = () => {
     return (
-        <div>
-            Portfolio
-        </div>
+        <Container>
+            <PortfolioScreen />
+        </Container>
     );
 };
 

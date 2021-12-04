@@ -1,4 +1,4 @@
-import {http} from './instances';
+import {authHttp, http} from './instances';
 import {AxiosResponse} from 'axios';
 import {StockPreview} from './types/StockPreview';
 import {StockInterface} from './types/StockInterface';
@@ -28,3 +28,7 @@ export const getStock = (id: number): Promise<AxiosResponse<StockInterface>> => 
 export const getPredict = (id: number): Promise<AxiosResponse<PredictResponse>> => http.get(`predict/${id}`);
 export const register = (body: RegisterBody): Promise<AxiosResponse<unknown>> => http.post('register', body);
 export const login = (body: LoginBody): Promise<AxiosResponse<LoginResponse>> => http.post('login', body);
+
+export const getPortfolio = (): Promise<AxiosResponse<unknown>> => authHttp.get('portfolio')
+export const addStock = (id: number): Promise<AxiosResponse<unknown>> => authHttp.post(`stocks/add/${id}`)
+export const removeStock = (id: number): Promise<AxiosResponse<unknown>> => authHttp.post(`stocks/remove/${id}`)
