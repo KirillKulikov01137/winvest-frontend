@@ -38,6 +38,14 @@ export const StyledStock = styled.div`
     font-size: 1.8rem;
     font-weight: 400;
     color: ${colors.white};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .nameText {
+    max-width: 900px;
+    overflow: hidden;
   }
 
   .linkDescriptionGreen {

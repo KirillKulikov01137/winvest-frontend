@@ -2,10 +2,10 @@ import styled from "styled-components";
 import {colors} from "../../styles/variables";
 
 export const StyledPageHeader = styled.div`
-  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem 2rem;
   background-color: ${colors.primary};
   
   span {

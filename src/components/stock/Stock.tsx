@@ -10,7 +10,7 @@ const Stock: FC<StockProps> = ({id, fullname, price, currency, shortname, change
         <StyledStock>
             <NavLink to={`${STOCK_ROUTE}${id}`} className="stockLink">
                 <div className="stockLinkContainer">
-                    <div><span className="linkDescriptionText">{shortname + ' ' + fullname}</span></div>
+                    <div className="nameText"><span style={{display: 'block'}} className="linkDescriptionText">{shortname + ' ' + fullname}</span></div>
                     <div>
                         <span className="linkDescriptionText"
                               style={{marginRight: '1rem'}}>
