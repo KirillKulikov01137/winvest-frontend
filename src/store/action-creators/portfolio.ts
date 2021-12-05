@@ -8,7 +8,7 @@ export const fetchPortfolio = () => {
             dispatch({type:PortfolioActionTypes.FETCH_PORTFOLIO})
             const response = await getPortfolio();
             console.log(response)
-            dispatch({type:PortfolioActionTypes.FETCH_PORTFOLIO_SUCCESS, payload: []})
+            dispatch({type:PortfolioActionTypes.FETCH_PORTFOLIO_SUCCESS, payload: response.data.stocks})
         } catch (e) {
 
             dispatch({type: PortfolioActionTypes.FETCH_PORTFOLIO_ERROR, payload: 'Ошибка при загрузке порфтеля'})

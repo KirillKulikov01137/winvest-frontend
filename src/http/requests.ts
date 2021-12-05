@@ -22,6 +22,10 @@ interface LoginResponse {
     token: string
 }
 
+export interface StockHandler {
+    quantity: string
+}
+
 
 export const getStocks = (): Promise<AxiosResponse<GetStocks>> => http.get('stocks');
 export const getStock = (id: number): Promise<AxiosResponse<StockInterface>> => http.get(`stocks/${id}?h=1`);
@@ -29,6 +33,6 @@ export const getPredict = (id: number): Promise<AxiosResponse<PredictResponse>> 
 export const register = (body: RegisterBody): Promise<AxiosResponse<unknown>> => http.post('register', body);
 export const login = (body: LoginBody): Promise<AxiosResponse<LoginResponse>> => http.post('login', body);
 
-export const getPortfolio = (): Promise<AxiosResponse<unknown>> => authHttp.get('portfolio')
-export const addStock = (id: number): Promise<AxiosResponse<unknown>> => authHttp.post(`stocks/add/${id}`)
-export const removeStock = (id: number): Promise<AxiosResponse<unknown>> => authHttp.post(`stocks/remove/${id}`)
+export const getPortfolio = (): Promise<AxiosResponse<GetStocks>> => authHttp.get('portfolio')
+export const addStockReq = (id: number, body: StockHandler): Promise<AxiosResponse<unknown>> => authHttp.post(`stocks/add/${id}`, body)
+export const removeStockReq = (id: number): Promise<AxiosResponse<unknown>> => authHttp.post(`stocks/remove/${id}`)

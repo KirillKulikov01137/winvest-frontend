@@ -84,7 +84,6 @@ function getData(history) {
     if (!history.predict)
         return
     GetPrediction(60, history.predict.type, history.predict.data);
-    console.log(history.predict.data);
 }
 
 function GetPrediction(x, type, predict) {

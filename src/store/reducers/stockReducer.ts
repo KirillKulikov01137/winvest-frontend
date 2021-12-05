@@ -31,6 +31,14 @@ export default function stockReducer(
             return {loading: false, error: null, stock: action.stock, predict: action.predict}
         case StockActionTypes.FETCH_STOCK_ERROR:
             return {loading: false, error: action.payload, stock: emptyStock, predict: []}
+        case StockActionTypes.ADD_STOCK:
+            return {...state}
+        case StockActionTypes.ADD_STOCK_SUCCESS:
+            return {...state, stock: {...state.stock, owned: true}}
+        case StockActionTypes.ADD_STOCK_ERROR:
+            return {...state, error: action.payload}
+        case StockActionTypes.REMOVE_STOCK_SUCCESS:
+            return {...state, stock: {...state.stock, owned: false, quantity: 0}}
         default:
             return state;
     }

@@ -34,4 +34,10 @@ export const StyledStockScreen = styled.div`
       color: #fff;
     }
   }
+  
+  .stockInput {
+    border: 0.1rem solid ${colors.primary};
+    border-radius: 0.3rem;
+    margin-right: 1rem;
+  }
 `

@@ -10,9 +10,9 @@ import {StyledStockScreen} from './StyledStockScreen';
 
 const StockScreen: FC = () => {
     const [predictType, setPredictType] = useState('dots')
-    const [quantity, setQuantity] = useState(0)
+    const [quantity, setQuantity] = useState('')
 
-    const {fetchStock} = useActions()
+    const {fetchStock, addStock , removeStock} = useActions()
     const params = useParams<ParamsI>();
     const id = +params.id;
 
@@ -24,11 +24,12 @@ const StockScreen: FC = () => {
     const {isAuth} = useTypedSelector(state => state.login)
 
     const onAddClick = () => {
-
+        addStock(id, quantity == '' ? {quantity: '0'} : {quantity})
+        setQuantity('')
     }
 
     const onRemoveClick = () => {
-
+        removeStock(id)
     }
 
     if (loading)
@@ -41,7 +42,7 @@ const StockScreen: FC = () => {
         <StyledStockScreen>
             <PageHeader title={stock.shortname + ' ' + stock.fullname}/>
             <div className="stockPageBody">
-                <div><Graphic hist={stock.history} predict={predict.filter(item=>item.type==predictType)[0]}/></div>
+                <div><Graphic hist={stock.history} predict={predict.filter(item => item.type == predictType)[0]}/></div>
                 <div>
                     {stock.price ? (<span
                             className="stockDescription">{`Текущая цена за акцию: ${convertNumber(stock.price)}`}<>&#8381;</></span>) :
@@ -58,13 +59,19 @@ const StockScreen: FC = () => {
                         <div><span className="stockDescription">Выберите метод предсказания</span></div>
                         <div className="custom-select">
                             <select value={predictType} onChange={(e) => setPredictType(e.target.value)}>
-                                {predict.map(item=> <option key={item.name} value={item.type}>{item.name}</option>)}
+                                {predict.map(item => <option key={item.name} value={item.type}>{item.name}</option>)}
                             </select>
                         </div>
                     </div>
+
                     <div className="stocksButtonsContainer">
-                        {isAuth && !stock.owned && <button className="stockBtn" onClick={()=>onAddClick()}>Добавить акцию</button>}
-                        {isAuth && stock.owned && <button className="stockBtn" onClick={()=>onRemoveClick()}>Удалить акцию</button>}
+                        {isAuth && (<div style={{display: 'flex'}}>
+                            <input className="stockInput" type="text" value={quantity}
+                                   onChange={(e) => setQuantity(e.target.value)}/>
+                            <button className="stockBtn" style={{marginRight: '1rem'}} onClick={() => onAddClick()}>Добавить акцию</button>
+                        </div>)}
+                        {isAuth && stock.owned &&
+                        <button className="stockBtn" onClick={() => onRemoveClick()}>Удалить акцию</button>}
                     </div>
                 </div>
             </div>

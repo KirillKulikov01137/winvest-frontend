@@ -16,9 +16,9 @@ const Header: FC = () => {
                     <NavLink to={HOME_ROUTE}>
                         <h1 className="logo">WINVEST</h1>
                     </NavLink>
-                    <div className="search">
-                        <input type="text" placeholder="Поиск" />
-                    </div>
+                    {/*<div className="search">*/}
+                    {/*    <input type="text" placeholder="Поиск" />*/}
+                    {/*</div>*/}
                     {
                         isAuth ? <AuthorizedHeader /> : <UnauthorizedHeader />
                     }
