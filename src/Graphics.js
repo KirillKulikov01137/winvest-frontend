@@ -94,11 +94,17 @@ function GetPrediction(x, type, predict) {
     {
         if(data.length > 0)
             data.push({
-            date: new Date(new Date(new Date(lastDate).getDate() + 24*1000*3600*(i-startX))).toISOString(),
+            date: new Date(addDays(lastDate, i-startX)).toISOString(),
             predict: calculatePrice(type != 'dots' ? i : i-startX, type, predict),
         })
     }
 }
+
+function addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
 
 let data = [];
 let oldData = [];
