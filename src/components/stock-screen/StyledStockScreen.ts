@@ -15,7 +15,7 @@ export const StyledStockScreen = styled.div`
   }
   
   .stocksButtonsContainer {
-    display: flex;
+    //display: flex;
     margin-top: 3rem;
   }
   

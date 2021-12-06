@@ -68,10 +68,10 @@ const StockScreen: FC = () => {
                         {isAuth && (<div style={{display: 'flex'}}>
                             <input className="stockInput" type="text" value={quantity}
                                    onChange={(e) => setQuantity(e.target.value)}/>
-                            <button className="stockBtn" style={{marginRight: '1rem'}} onClick={() => onAddClick()}>Добавить акцию</button>
+                            <button className="stockBtn" onClick={() => onAddClick()}>Добавить акцию</button>
                         </div>)}
                         {isAuth && stock.owned &&
-                        <button className="stockBtn" onClick={() => onRemoveClick()}>Удалить акцию</button>}
+                        <button className="stockBtn" style={{margin: '1.2rem 0 0 18.1rem'}} onClick={() => onRemoveClick()}>Удалить акцию</button>}
                     </div>
                 </div>
             </div>

@@ -1,17 +1,20 @@
 import {Dispatch} from 'redux';
 import {StockAction, StockActionTypes} from '../reducers/stockReducerTypes';
-import {addStockReq, getPredict, getStock, removeStockReq, StockHandler} from '../../http/requests';
+import {addStockReq, getHistory, getPredict, getStock, removeStockReq, StockHandler} from '../../http/requests';
 
 export const fetchStock = (id: number) => {
     return async (dispatch: Dispatch<StockAction>) => {
         try {
             dispatch({type: StockActionTypes.FETCH_STOCK})
             const stockData = await getStock(id);
-            // console.log(stockData)
+            const historyData = await getHistory(id);
             const predictData = await getPredict(id);
+
+            const fetchedStock = stockData.data;
+            fetchedStock.history = historyData.data.history;
             dispatch({
                 type: StockActionTypes.FETCH_STOCK_SUCCESS,
-                stock: stockData.data,
+                stock: fetchedStock,
                 predict: predictData.data.methods
             })
         } catch (e) {

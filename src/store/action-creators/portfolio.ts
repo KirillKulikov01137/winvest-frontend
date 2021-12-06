@@ -7,7 +7,7 @@ export const fetchPortfolio = () => {
         try {
             dispatch({type:PortfolioActionTypes.FETCH_PORTFOLIO})
             const response = await getPortfolio();
-            console.log(response)
+            // console.log(response)
             dispatch({type:PortfolioActionTypes.FETCH_PORTFOLIO_SUCCESS, payload: response.data.stocks})
         } catch (e) {
 
