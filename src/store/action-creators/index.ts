@@ -3,6 +3,7 @@ import * as stocksActionCreators from './stocks'
 import * as userActionCreators from './user'
 import * as loginActionCreators from './login'
 import * as portfolioActionCreators from './portfolio'
+import * as searchActionCreators from './search'
 
 
 export default {
@@ -10,5 +11,6 @@ export default {
     ...stocksActionCreators,
     ...userActionCreators,
     ...loginActionCreators,
-    ...portfolioActionCreators
+    ...portfolioActionCreators,
+    ...searchActionCreators
 }
