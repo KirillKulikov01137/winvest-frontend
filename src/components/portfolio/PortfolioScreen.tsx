@@ -2,9 +2,11 @@ import React, {FC, useEffect} from 'react';
 import {useTypedSelector} from '../../hooks/useTypedSelector';
 import {useActions} from '../../hooks/useActions';
 import Stock from '../stock/Stock';
+import PageHeader from '../page-header/PageHeader';
 
 const PortfolioScreen: FC = () => {
-    const {stocks, error, loading} = useTypedSelector(state => state.portfolio)
+    const {stocks, error, loading, total_value} = useTypedSelector(state => state.portfolio)
+    const {login} = useTypedSelector(state => state.login)
     const {fetchPortfolio} = useActions()
 
     useEffect(() => {
@@ -18,7 +20,9 @@ const PortfolioScreen: FC = () => {
         return <h1 className="technical-message">{error}</h1>
 
     return (
-        <>{stocks.map((stock) => <Stock key={stock.id}
+        <>
+            <PageHeader title={`Портфель ${login}. Общая стоимость ${total_value}`} />
+            {stocks.map((stock) => <Stock key={stock.id}
                                         id={stock.id}
                                         fullname={stock.fullname}
                                         price={stock.price}

@@ -2,6 +2,7 @@ import {StockPreview} from '../../http/types/StockPreview';
 
 export interface Portfolio {
     stocks: StockPreview[]
+    total_value: number
     loading: boolean
     error: null | string
 }
@@ -18,7 +19,8 @@ interface FETCH_PORTFOLIO_ACTION {
 
 interface FETCH_PORTFOLIO_SUCCESS_ACTION {
     type: PortfolioActionTypes.FETCH_PORTFOLIO_SUCCESS
-    payload: StockPreview[]
+    stocks: StockPreview[]
+    total_value: number
 }
 
 interface FETCH_PORTFOLIO_ERROR_ACTION {

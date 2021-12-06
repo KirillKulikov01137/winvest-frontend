@@ -2,7 +2,7 @@ import {authHttp, http} from './instances';
 import {AxiosResponse} from 'axios';
 import {StockPreview} from './types/StockPreview';
 import {HistoryItemInterface, StockInterface} from './types/StockInterface';
-import {HistoryResponse, PredictResponse} from './types/responses';
+import {HistoryResponse, PortfolioResponse, PredictResponse} from './types/responses';
 
 interface GetStocks {
     stocks: StockPreview[]
@@ -34,6 +34,6 @@ export const register = (body: RegisterBody): Promise<AxiosResponse<unknown>> =>
 export const login = (body: LoginBody): Promise<AxiosResponse<LoginResponse>> => http.post('login', body);
 
 export const getStock = (id: number): Promise<AxiosResponse<StockInterface>> => authHttp.get(`stocks/${id}`);
-export const getPortfolio = (): Promise<AxiosResponse<GetStocks>> => authHttp.get('portfolio')
+export const getPortfolio = (): Promise<AxiosResponse<PortfolioResponse>> => authHttp.get('portfolio')
 export const addStockReq = (id: number, body: StockHandler): Promise<AxiosResponse<unknown>> => authHttp.post(`stocks/add/${id}`, body)
 export const removeStockReq = (id: number): Promise<AxiosResponse<unknown>> => authHttp.post(`stocks/remove/${id}`)
