@@ -110,6 +110,10 @@ let data = [];
 let oldData = [];
 let lastPrice = 0;
 let lastDate;
+let from;
+let to;
+
+
 
 function Graphic(history) {
     getData(history);
@@ -145,12 +149,17 @@ function Graphic(history) {
 
                 <CartesianGrid vertical={false}/>
 
-                <Brush tickFormatter={xAxisTickFormatter} dataKey="date"/>
+                <Brush tickFormatter={xAxisTickFormatter} dataKey="date" startIndex={from} endIndex={to} onChange={handleBrushChange}/>
 
             </AreaChart>
 
         </ResponsiveContainer>
     );
+}
+
+function handleBrushChange ({ startIndex, endIndex }) {
+      from = startIndex;
+      to = endIndex
 }
 
 const CustomizedAxisTick = ({ x, y, payload }) => {
@@ -166,7 +175,7 @@ const CustomizedAxisTick = ({ x, y, payload }) => {
 
 const xAxisTickFormatter = (timestamp_measured) => {
     return moment(timestamp_measured)
-        .format("ll")
+    .format("ll");
 }
 
 
