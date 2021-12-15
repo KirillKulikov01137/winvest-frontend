@@ -29,7 +29,7 @@ export const addStock = (id: number, body: StockHandler) => {
             dispatch({type: StockActionTypes.ADD_STOCK})
             const response = await addStockReq(id, body);
             // console.log(response)
-            dispatch({type: StockActionTypes.ADD_STOCK_SUCCESS, id})
+            dispatch({type: StockActionTypes.ADD_STOCK_SUCCESS, id, quantity: parseInt(body.quantity)})
         } catch (e) {
             dispatch({type: StockActionTypes.ADD_STOCK_ERROR, payload: 'Ошибка при добавлении акции'})
         }

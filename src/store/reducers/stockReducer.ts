@@ -34,7 +34,7 @@ export default function stockReducer(
         case StockActionTypes.ADD_STOCK:
             return {...state}
         case StockActionTypes.ADD_STOCK_SUCCESS:
-            return {...state, stock: {...state.stock, owned: true}}
+            return {...state, stock: {...state.stock, owned: true, quantity: action.quantity}}
         case StockActionTypes.ADD_STOCK_ERROR:
             return {...state, error: action.payload}
         case StockActionTypes.REMOVE_STOCK_SUCCESS:

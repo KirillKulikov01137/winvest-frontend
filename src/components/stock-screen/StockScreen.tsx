@@ -73,6 +73,8 @@ const StockScreen: FC = () => {
                         {isAuth && stock.owned &&
                         <button className="stockBtn" style={{margin: '1.2rem 0 0 18.1rem'}} onClick={() => onRemoveClick()}>Удалить акцию</button>}
                     </div>
+
+                    {isAuth && stock.owned && <div style={{marginTop: '2rem'}} className="stockDescription">Количество акций в вашем портфеле: {stock.quantity}</div>}
                 </div>
             </div>
         </StyledStockScreen>

@@ -40,6 +40,7 @@ interface ADD_STOCK_ACTION {
 interface ADD_STOCK_SUCCESS_ACTION {
     type: StockActionTypes.ADD_STOCK_SUCCESS
     id: number
+    quantity: number
 }
 
 interface ADD_STOCK_ERROR_ACTION {

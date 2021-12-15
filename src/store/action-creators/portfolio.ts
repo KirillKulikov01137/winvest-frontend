@@ -11,7 +11,8 @@ export const fetchPortfolio = () => {
             dispatch({
                 type: PortfolioActionTypes.FETCH_PORTFOLIO_SUCCESS,
                 stocks: response.data.stocks,
-                total_value: response.data.total_value
+                total_value: response.data.total_value,
+                total_profit: response.data.total_profit
             })
         } catch (e) {
 

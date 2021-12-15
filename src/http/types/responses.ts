@@ -20,4 +20,5 @@ export interface HistoryResponse {
 export interface PortfolioResponse {
     stocks: StockPreview[]
     total_value: number
+    total_profit: number
 }
