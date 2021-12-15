@@ -1,6 +1,7 @@
 import {Dispatch} from 'redux';
 import {StockAction, StockActionTypes} from '../reducers/stockReducerTypes';
 import {addStockReq, getHistory, getPredict, getStock, removeStockReq, StockHandler} from '../../http/requests';
+import { setSize } from '../../Graphics';
 
 export const fetchStock = (id: number) => {
     return async (dispatch: Dispatch<StockAction>) => {
@@ -12,6 +13,7 @@ export const fetchStock = (id: number) => {
 
             const fetchedStock = stockData.data;
             fetchedStock.history = historyData.data.history;
+            setSize(0, historyData.data.history.length+59);
             dispatch({
                 type: StockActionTypes.FETCH_STOCK_SUCCESS,
                 stock: fetchedStock,

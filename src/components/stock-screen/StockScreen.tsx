@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import {ParamsI} from '../../pages/stock-page/ParamsInterface';
 import {useTypedSelector} from '../../hooks/useTypedSelector';
 import PageHeader from '../page-header/PageHeader';
-import Graphic from '../../Graphics';
+import Graphic, { setSize } from '../../Graphics';
 import {useActions} from '../../hooks/useActions';
 import {convertNumber} from '../../utils';
 import {StyledStockScreen} from './StyledStockScreen';
@@ -18,6 +18,7 @@ const StockScreen: FC = () => {
 
     useEffect(() => {
         fetchStock(id)
+        //setSize(0, stock.history.length+59)
     }, [])
 
     const {stock, predict, loading, error} = useTypedSelector(state => state.stock)

@@ -16,6 +16,8 @@ import 'moment/locale/ru';
 
 moment.locale('ru')
 
+export const setSize = (left, right) => {from = left; to = right}
+
 function linear(a, b, x){
     return a * x + b
 }
@@ -67,8 +69,8 @@ function calculatePrice(x, type, predict)
 
 function getData(history) {
     data = [];
-    const hist = history.hist
-
+    const hist = history.hist;
+    
     for (let i = 0; i < hist.length; i++) {
         data.push({
             date: new Date(hist[i][0]).toISOString(),
@@ -87,7 +89,7 @@ function getData(history) {
 }
 
 function GetPrediction(x, type, predict) {
-    // data = oldData;
+    //data = oldData;
 
     let startX = findX(type, predict);
     for(let i=1 + startX; i<=x + startX; i++)
@@ -117,7 +119,6 @@ let to;
 
 function Graphic(history) {
     getData(history);
-
     return (
         <ResponsiveContainer width="100%" height={400}>
             <AreaChart data={data} margin={{top: 5, right: 0, left: 30, bottom: 0}}>
@@ -159,7 +160,7 @@ function Graphic(history) {
 
 function handleBrushChange ({ startIndex, endIndex }) {
       from = startIndex;
-      to = endIndex
+      to = endIndex;
 }
 
 const CustomizedAxisTick = ({ x, y, payload }) => {
